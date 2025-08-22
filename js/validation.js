@@ -1,0 +1,41 @@
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    // Prevent form submission
+    event.preventDefault();
+
+    // Clear previous error messages
+    document.getElementById('maincategoryError').textContent = '';
+    document.getElementById('subcategoryError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('passwordError').textContent = '';
+    document.getElementById('confirmPasswordError').textContent = '';
+
+    // Get form values
+    const category_id = document.getElementById('category_id').value.trim();
+    const sub_category_id = document.getElementById('sub_category_id').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    let isValid = true;
+
+    // Validate name
+    if (name === '') {
+        document.getElementById('nameError').textContent = 'Name is required.';
+        isValid = false;
+    }
+
+    // Validate email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === '') {
+        document.getElementById('emailError').textContent = 'Email is required.';
+        isValid = false;
+    } else if (!emailPattern.test(email)) {
+        document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+        isValid = false;
+    }
+
+    // Validate password
+    if (password === '') {
+        document.getElementById('passwordError').textContent = 'Password is required.';
+        isValid = false;
+    } else if (password.length

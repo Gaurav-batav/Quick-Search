@@ -1,0 +1,13 @@
+# RewriteCond %{REQUEST_FILENAME}.php -f
+# RewriteRule !.*\.php$ %{REQUEST_FILENAME}.php [QSA,L]
+
+
+RewriteEngine On
+
+# If the request is not for a real file or folder
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# If there's a .php file matching the name, rewrite to it
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
