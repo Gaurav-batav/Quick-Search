@@ -450,51 +450,66 @@
 
   <div class="hiddenbar-body-ovelay"></div>
 
-  <!-- Mobile Nav  -->
-  <div id="page" class="mobilie_header_nav stylehome1">
+<div id="page" class="mobilie_header_nav stylehome1">
     <div class="mobile-menu">
-      <div class="header innerpage-style">
-        <div class="menu_and_widgets">
-          <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-            <a class="menubar" href="#menu"><img src="images/mobile-dark-nav-icon.svg" alt=""></a>
-            <a class="mobile_logo" href="index"><img src="images/logo/logo2.png" alt="" height="50"></a>
-             <?php
-                if(!isset($_SESSION['user'])){
-            ?>
-            <a data-bs-toggle="modal" href="#exampleModalToggle"><span class="icon fz18 far fa-user-circle"></span></a>
-            <?php } else{ ?>
-            <a class="login-info d-flex align-items-center" href="dashboard"><i class="far fa-user-circle fz16 me-2"></i> <span class="d-none d-xl-block">User</span></a>
-            <?php } ?>
-          </div>
+        <div class="header innerpage-style">
+            <div class="menu_and_widgets">
+                <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
+                    <a class="menubar" href="#menu"><img src="images/mobile-dark-nav-icon.svg" alt=""></a>
+                    <a class="mobile_logo" href="index"><img src="images/logo/logo2.png" alt="" height="50"></a>
+                    <?php
+                    if(!isset($_SESSION['user'])){
+                    ?>
+                    <a data-bs-toggle="modal" href="#exampleModalToggle"><span class="icon fz18 far fa-user-circle"></span></a>
+                    <?php } else{ ?>
+                    <a class="login-info d-flex align-items-center" href="dashboard"><i class="far fa-user-circle fz16 me-2"></i> <span class="d-none d-xl-block">User</span></a>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- /.mobile-menu -->
     <nav id="menu" class="">
-      <ul>
-        <li><span>Home</span>
-          <ul>
-            
-          </ul>
-        </li>
-        <li><span>Popular Categories</span>
-          <ul>
-            <li><span>Listing Grid</span>
-              <ul>
-                <li><a href="list">Restaurant </a></li>
-                <li><a href="#">Hospitals</a></li>
-                <li><a href="#">Hotels</a></li>
-                <li><a href="#">Jewellery shops</a></li>
-              </ul>
+        <ul>
+            <li><a href="index"><span>Home</span></a></li>
+            <li><span>Popular Categories</span>
+                <ul>
+                    <?php
+                    $conn = $pdo->open();
+                    try {
+                        $stmt = $conn->prepare("SELECT id, name, cat_slug, status, creation_on FROM industries ORDER BY creation_on DESC");
+                        $stmt->execute();
+                        foreach($stmt as $row) {
+                            echo '<li><a href="list?cat_slug=' . $row['cat_slug'] . '">' . $row['name'] . '</a></li>';
+                        }
+                    } catch(PDOException $e) {
+                        echo $e->getMessage();
+                    }
+                    $pdo->close();
+                    ?>
+                </ul>
             </li>
-           
-          </ul>
-        </li>
-        
-       
-      </ul>
+            <li><a href="advertising"><span>Other Services</span></a></li>
+            <?php
+            if(!isset($_SESSION['user'])){
+            ?>
+            <li><a class="login-info d-flex align-items-center" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span>Login/Register</span></a></li>
+            <li><a class="login-info d-flex align-items-center" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span>Add Profile</span></a></li>
+            <?php } else { ?>
+            <li><a href="dashboard"><span>Dashboard</span></a></li>
+            <li><a href="select-industry"><span>Add Profile</span></a></li>
+            <?php } ?>
+            
+            <li class="px-3 mobile-menu-btn">
+                <?php
+                if(!isset($_SESSION['user'])){
+                ?>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="ud-btn btn-thm text-white">Add Profile<i class="fal fa-arrow-right-long"></i></a>
+                <?php } else { ?>
+                <a href="select-industry" class="ud-btn btn-thm text-white">Add Profile<i class="fal fa-arrow-right-long"></i></a>
+                <?php } ?>
+            </li>
+        </ul>
     </nav>
-  </div>
-
-  <div class="body_content">
+</div>
 

@@ -18,7 +18,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                       <div class="advance-content-style3">
                        <div class="form-search position-relative" accept-charset="utf-8">
-                        <div class="row">
+                        <div class="row">  
                           <div class="col-md-5 col-lg-5">
                             <div class="advance-search-field position-relative text-start">
                                 <div class="box-search">

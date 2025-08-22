@@ -377,75 +377,65 @@
   <div class="hiddenbar-body-ovelay"></div>
 
   <!-- Mobile Nav  -->
-  <div id="page" class="mobilie_header_nav stylehome1">
+<div id="page" class="mobilie_header_nav stylehome1">
     <div class="mobile-menu">
-      <div class="header innerpage-style">
-        <div class="menu_and_widgets">
-          <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
-            <a class="menubar" href="#menu"><img src="images/mobile-dark-nav-icon.svg" alt=""></a>
-            <a class="mobile_logo" href="index"><img src="images/logo/logo2.png" alt="" height="50"></a>
-           <?php
-                if(!isset($_SESSION['user'])){
-            ?>
-            <a data-bs-toggle="modal" href="#exampleModalToggle"><span class="icon fz18 far fa-user-circle"></span></a>
-            <?php } else{ ?>
-            <a class="login-info d-flex align-items-center" href="user/dashboard"><i class="far fa-user-circle fz16 me-2"></i> <span class="d-none d-xl-block">User</span></a>
-            <?php } ?>
-          </div>
+        <div class="header innerpage-style">
+            <div class="menu_and_widgets">
+                <div class="mobile_menu_bar d-flex justify-content-between align-items-center">
+                    <a class="menubar" href="#menu"><img src="images/mobile-dark-nav-icon.svg" alt=""></a>
+                    <a class="mobile_logo" href="index"><img src="images/logo/logo2.png" alt="" height="50"></a>
+                    <?php
+                    if(!isset($_SESSION['user'])){
+                    ?>
+                    <a data-bs-toggle="modal" href="#exampleModalToggle"><span class="icon fz18 far fa-user-circle"></span></a>
+                    <?php } else{ ?>
+                    <a class="login-info d-flex align-items-center" href="dashboard"><i class="far fa-user-circle fz16 me-2"></i> <span class="d-none d-xl-block">User</span></a>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- /.mobile-menu -->
     <nav id="menu" class="">
-      <ul>
-        <li><span>Home</span>
-          <ul>
+        <ul>
+            <li><a href="index"><span>Home</span></a></li>
+            <li><span>Popular Categories</span>
+                <ul>
+                    <?php
+                    $conn = $pdo->open();
+                    try {
+                        $stmt = $conn->prepare("SELECT id, name, cat_slug, status, creation_on FROM industries ORDER BY creation_on DESC");
+                        $stmt->execute();
+                        foreach($stmt as $row) {
+                            echo '<li><a href="list?cat_slug=' . $row['cat_slug'] . '">' . $row['name'] . '</a></li>';
+                        }
+                    } catch(PDOException $e) {
+                        echo $e->getMessage();
+                    }
+                    $pdo->close();
+                    ?>
+                </ul>
+            </li>
+            <li><a href="advertising"><span>Other Services</span></a></li>
+            <?php
+            if(!isset($_SESSION['user'])){
+            ?>
+            <li><a class="login-info d-flex align-items-center" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span>Login/Register</span></a></li>
+            <li><a class="login-info d-flex align-items-center" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span>Add Profile</span></a></li>
+            <?php } else { ?>
+            <li><a href="dashboard"><span>Dashboard</span></a></li>
+            <li><a href="select-industry"><span>Add Profile</span></a></li>
+            <?php } ?>
             
-          </ul>
-        </li>
-        <li><span>Category</span>
-          <ul>
-            <li><span>Listing Grid</span>
-              <ul>
-                <li><a href="list.php">Grid Default v1</a></li>
-                <li><a href="#">Grid Default v2</a></li>
-                <li><a href="#">Grid Full Width 3 Cols</a></li>
-                <li><a href="#">Grid Full Width 4 Cols</a></li>
-                <li><a href="#">Grid Full Width 2 Cols</a></li>
-                <li><a href="#">Grid Full Width 1 Cols v1</a></li>
-                <li><a href="#">Grid Full Width 1 Cols v2</a></li>
-                <li><a href="#">Banner Search v1</a></li>
-                <li><a href="#">Banner Search v2</a></li>
-              </ul>
+            <li class="px-3 mobile-menu-btn">
+                <?php
+                if(!isset($_SESSION['user'])){
+                ?>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="ud-btn btn-thm text-white">Add Profile<i class="fal fa-arrow-right-long"></i></a>
+                <?php } else { ?>
+                <a href="select-industry" class="ud-btn btn-thm text-white">Add Profile<i class="fal fa-arrow-right-long"></i></a>
+                <?php } ?>
             </li>
-            <li><span>List Style</span>
-              <ul>
-                <li><a href="#">Style V1</a></li>
-                <li><a href="#">All List</a></li>
-              </ul>
-            </li>
-            <li><span>Listing Single</span>
-              <ul>
-                <li><a href="#">Single V1</a></li>
-                
-              </ul>
-            </li>
-            <li><span>Map Style</span>
-              <ul>
-                <li><a href="#">Map Header</a></li>
-                
-              </ul>
-            </li>
-          </ul>
-        </li>
-        
-        <li class="px-3 mobile-menu-btn">
-          <a href="#" class="ud-btn btn-thm text-white">Submit Property<i class="fal fa-arrow-right-long"></i></a>
-        </li>
-        <!-- Only for Mobile View -->
-      </ul>
+        </ul>
     </nav>
-  </div>
-
-  <div class="body_content">
-
+</div>
