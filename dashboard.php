@@ -82,7 +82,25 @@
                 </div>
               </div>
             </div>
-  
+  <script>
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close dropdown if user clicks outside
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn') && !event.target.closest('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    for (var i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
             <div class="col-lg-12">
               <div class="dashboard_title_area">
                 <h2>Hello, <?php echo $user['name'];?></h2>
@@ -101,14 +119,9 @@
                             $stmt->execute();
                             $urow =  $stmt->fetch();
                             {
-?>
-                  <?php
-                        $stmt = $conn->prepare("SELECT *, COUNT(*) AS numrows FROM enquiry WHERE p_id='".$urow['id']."'");
-                            $stmt->execute();
-                            $urow =  $stmt->fetch();
-                            {
-?><?php echo $urow['numrows'];?> <?php } ?>
-<?php } ?>
+                               ?>
+                      
+                      <?php } ?>
                             </div>
                 </div>
                 <div class="icon text-center"><i class="flaticon-home"></i></div>

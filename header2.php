@@ -395,7 +395,7 @@
             </div>
         </div>
     </div>
-    <!-- /.mobile-menu -->
+ <!-- /.mobile-menu -->
     <nav id="menu" class="">
         <ul>
             <li><a href="index"><span>Home</span></a></li>
@@ -420,22 +420,14 @@
             <?php
             if(!isset($_SESSION['user'])){
             ?>
-            <li><a class="login-info d-flex align-items-center" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span>Login/Register</span></a></li>
-            <li><a class="login-info d-flex align-items-center" data-bs-toggle="modal" href="#exampleModalToggle" role="button"><span>Add Profile</span></a></li>
+          
             <?php } else { ?>
             <li><a href="dashboard"><span>Dashboard</span></a></li>
-            <li><a href="select-industry"><span>Add Profile</span></a></li>
+      
             <?php } ?>
             
-            <li class="px-3 mobile-menu-btn">
-                <?php
-                if(!isset($_SESSION['user'])){
-                ?>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalToggle" class="ud-btn btn-thm text-white">Add Profile<i class="fal fa-arrow-right-long"></i></a>
-                <?php } else { ?>
-                <a href="select-industry" class="ud-btn btn-thm text-white">Add Profile<i class="fal fa-arrow-right-long"></i></a>
-                <?php } ?>
-            </li>
+            
         </ul>
     </nav>
 </div>
+
